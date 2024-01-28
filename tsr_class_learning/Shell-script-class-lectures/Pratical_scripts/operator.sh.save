@@ -1,0 +1,35 @@
+#!/bin/bash
+# Author: Louis Benagha
+# Purpose: Check the status of a given file
+echo "Tell me the directory name or the file name: please enter absolute path: "
+read FILE
+if [ -e "$FILE" ]; then
+	if [ -f "$FILE" ]; then
+		echo "$FILE exist in this directory."
+	fi
+	if [ -d "$FILE" ]; then
+		echo "$FILE is a directory."
+	fi
+	if  [ -r "$FILE" ]; then
+		echo "$FILE is a readable file."
+	else
+    		echo "$FILE is not a readable file."
+	fi
+	if [ -w "$FILE" ]; then
+		echo "$FILE is a writable file."
+	fi
+	if [ -x "$FILE" ]; then
+		echo  "$FILE is an executable file."
+	else 
+		echo "$FILE is not an executable file."
+	fi
+	if [ -s "$FILE" ]; then
+		echo  "$FILE is greater than zero."
+	fi
+	if [ -z 
+else
+   echo "$FILE does not exist"
+fi
+exit
+
+

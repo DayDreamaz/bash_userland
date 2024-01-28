@@ -1,0 +1,31 @@
+#ReplicaSet
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: tsr-bookings
+    tier: frontend
+    env: development
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+      app: tsr-bookings
+  template:
+    metadata:
+      labels:
+        tier: frontend
+        app: tsr-bookings
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+
+
+
+
+
+#ReplicaSet -> Pods -> Containers

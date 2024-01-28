@@ -1,0 +1,70 @@
+use todoapp;
+show tables;
+select * from tasks;
+
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    task VARCHAR(255) NOT NULL,
+    status BOOLEAN DEFAULT 0
+);
+
+
+select * from tasks;
+
+python3 -m venv .env && source .env/bin/activate
+ 
+pip install -r requirements.txt
+
+  
+pip install gunicorn
+
+[Unit]
+Description=TSR Learning Todo App
+After=network.target
+
+[Service]
+WorkingDirectory=/home/ubuntu
+ExecStart=.env/bin/gunicorn -w 1 todo:app
+  
+sudo nano /etc/systemd/system/tsr-todo.service
+
+[Unit]
+Description=TSR Learning Todo App
+After=network.target
+
+[Service]
+WorkingDirectory=/home/ubuntu/
+ExecStart=/home/ubuntu/.env/bin/gunicorn -w 1 todo:app
+
+  
+sudo systemctl  daemon-reload
+
+sudo systemctl status tsr-todo.service
+sudo systemctl start tsr-todo.service
+sudo systemctl status tsr-todo.service
+curl localhost:8000
+
+  
+sudo systemctl status tsr-todo.service
+sudo nano /etc/nginx/sites-available/default
+
+location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                #try_files $uri $uri/ =404;
+                proxy_pass localhost:8000;                                            
+        }
+
+sudo nginx -t
+
+location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                #try_files $uri $uri/ =404;
+                proxy_pass http://localhost:8000;
+        }
+
+sudo systemctl restart nginx
+sudo nginx -t
+
+

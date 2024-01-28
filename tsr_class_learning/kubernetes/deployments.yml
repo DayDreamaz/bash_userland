@@ -1,0 +1,18 @@
+#Deployment -> ReplicaSet -> Pods -> Containers
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tsr-bookings
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tsr-bookings
+  template:
+    metadata:
+      labels:
+        app: tsr-bookings
+    spec:
+      containers:
+      - name: tsr-bookings-frontend
+        image: nginx
